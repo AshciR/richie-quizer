@@ -10,8 +10,8 @@
 
     <properties>
         <version.wildfly.swarm>2017.2.0</version.wildfly.swarm>
-        <version.checkstyle>7.5.1</version.checkstyle>
         <version.junit>4.12</version.junit>
+        <version.guava>21.0</version.guava>
         <maven.complier.source>1.8</maven.complier.source>
         <maven.complier.target>1.8</maven.complier.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -33,9 +33,9 @@
             <type>pom</type>
         </dependency>
         <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${version.checkstyle}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${version.guava}</version>
         </dependency>
     </dependencies>
 
