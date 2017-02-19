@@ -144,24 +144,20 @@ public final class TriviaQuestion {
         }
 
         public TriviaQuestion build() {
-            checkState((
-                               (id > 0)
-                               || (isStringValid(this.question))
-                               || (isStringValid(this.answerA))
-                               || (isStringValid(this.answerB))
-                               || (isStringValid(this.answerC))
-                               || (isStringValid(this.answerD))
-                               || (isStringValid(this.correctAnswer))
-                               || isStringValid((this.hint))
-                               || (this.lastUpdated != null)
-                       ), "the question is in an incomplete state."
-                      );
-
+            checkState(id > 0, "the id has to be a positive number.");
+            checkState(isStringValid(question), "question needs to have a value.");
+            checkState(isStringValid(answerA), "answerA needs to have a value.");
+            checkState(isStringValid(answerB), "answerB needs to have a value.");
+            checkState(isStringValid(answerC), "answerC needs to have a value.");
+            checkState(isStringValid(answerD), "answerD needs to have a value.");
+            checkState(isStringValid(correctAnswer), "correctAnswer needs to have a value.");
+            checkState(isStringValid(hint), "hint needs to have a value.");
+            checkState(null != lastUpdated, "the lastUpdated needs to have a value.");
             return new TriviaQuestion(this);
         }
 
         private boolean isStringValid(String val){
-            return !("".equals(val) || val.trim().isEmpty());
+            return !(null == val || "".equals(val) || val.trim().isEmpty());
         }
 
     }
