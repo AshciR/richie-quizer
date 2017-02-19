@@ -32,6 +32,42 @@ public final class TriviaQuestion {
         this.lastUpdated = builder.lastUpdated;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getAnswerA() {
+        return answerA;
+    }
+
+    public String getAnswerB() {
+        return answerB;
+    }
+
+    public String getAnswerC() {
+        return answerC;
+    }
+
+    public String getAnswerD() {
+        return answerD;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public LocalDate getLastUpdated() {
+        return lastUpdated;
+    }
+
     /**
      * Determines if too questions are equal.
      * In order for questions to equal, are the fields have to be identical.
@@ -94,7 +130,7 @@ public final class TriviaQuestion {
         private LocalDate lastUpdated;
 
         public Builder id(long val) {
-            checkState(val > 0, "the id has to be a positive number.");
+            checkState(val >= 0, "the id has to be a positive number.");
             id = val;
             return this;
         }
@@ -147,7 +183,7 @@ public final class TriviaQuestion {
         }
 
         public TriviaQuestion build() {
-            checkState(id > 0, "the id has to be a positive number.");
+            checkState(id >= 0, "the id has to be a positive number.");
             checkState(isStringValid(question), "question needs to have a value.");
             checkState(isStringValid(answerA), "answerA needs to have a value.");
             checkState(isStringValid(answerB), "answerB needs to have a value.");
