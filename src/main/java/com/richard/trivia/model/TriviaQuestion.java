@@ -91,69 +91,75 @@ public final class TriviaQuestion {
         private LocalDate lastUpdated;
 
         public Builder id(long val) {
-            checkState(val < 0, "the id has to be a positive number.");
+            checkState(val > 0, "the id has to be a positive number.");
             id = val;
             return this;
         }
 
         public Builder question(String val) {
-            checkState("".equals(val) || val.isEmpty(), "question needs to have a value.");
+            checkState(isStringValid(val), "question needs to have a value.");
             question = val;
             return this;
         }
 
         public Builder answerA(String val) {
-            checkState("".equals(val) || val.isEmpty(), "answerA needs to have a value.");
+            checkState(isStringValid(val), "answerA needs to have a value.");
             answerA = val;
             return this;
         }
 
         public Builder answerB(String val){
-            checkState("".equals(val) || val.isEmpty(),"answerB needs to have a value.");
+            checkState(isStringValid(val),"answerB needs to have a value.");
             answerB = val;
             return this;
         }
 
         public Builder answerC(String val){
-            checkState("".equals(val) || val.isEmpty(), "answerC needs to have a value.");
+            checkState(isStringValid(val), "answerC needs to have a value.");
             answerC = val;
             return this;
         }
 
         public Builder answerD(String val){
-            checkState("".equals(val) || val.isEmpty(), "answerD needs to have a value.");
+            checkState(isStringValid(val), "answerD needs to have a value.");
             answerD = val;
             return this;
         }
 
         public Builder correctAnswer(String val) {
-            checkState("".equals(val) || val.isEmpty(), "correctAnswer needs to have a value.");
+            checkState(isStringValid(val), "correctAnswer needs to have a value.");
             correctAnswer = val;
             return this;
         }
 
         public Builder hint(String val) {
-            checkState("".equals(val) || val.isEmpty(), "hint needs to have a value.");
+            checkState(isStringValid(val), "hint needs to have a value.");
             hint = val;
             return this;
         }
         public Builder lastUpdated(LocalDate val) {
-            checkState(null == val, "the lastUpdated needs to have a value.");
+            checkState(null != val, "the lastUpdated needs to have a value.");
             lastUpdated = val;
             return this;
         }
 
         public TriviaQuestion build() {
-            checkState((id < 0)
-                               || ("".equals(this.question) || this.question.trim().isEmpty())
-                               || ("".equals(this.answerA) || this.answerA.trim().isEmpty())
-                               || ("".equals(this.answerB) || this.answerB.trim().isEmpty())
-                               || ("".equals(this.answerC) || this.answerC.trim().isEmpty())
-                               || ("".equals(this.answerD) || this.answerD.trim().isEmpty())
-                               || ("".equals(this.correctAnswer) || this.correctAnswer.trim().isEmpty())
-                               || ("".equals(this.hint) || this.hint.trim().isEmpty())
-                               || (this.lastUpdated == null), "the question is in an incomplete state.");
+            checkState((id > 0)
+                               || (isStringValid(this.question))
+                               || (isStringValid(this.answerA))
+                               || (isStringValid(this.answerB))
+                               || (isStringValid(this.answerC))
+                               || (isStringValid(this.answerD))
+                               || (isStringValid(this.correctAnswer))
+                               || isStringValid((this.hint))
+                               || (this.lastUpdated != null), "the question is in an incomplete state.");
+
             return new TriviaQuestion(this);
         }
+
+        private boolean isStringValid(String val){
+            return !("".equals(val) || val.trim().isEmpty());
+        }
+
     }
 }
