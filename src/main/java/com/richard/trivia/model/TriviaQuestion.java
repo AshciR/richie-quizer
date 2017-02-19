@@ -144,7 +144,8 @@ public final class TriviaQuestion {
         }
 
         public TriviaQuestion build() {
-            checkState((id > 0)
+            checkState((
+                               (id > 0)
                                || (isStringValid(this.question))
                                || (isStringValid(this.answerA))
                                || (isStringValid(this.answerB))
@@ -152,7 +153,9 @@ public final class TriviaQuestion {
                                || (isStringValid(this.answerD))
                                || (isStringValid(this.correctAnswer))
                                || isStringValid((this.hint))
-                               || (this.lastUpdated != null), "the question is in an incomplete state.");
+                               || (this.lastUpdated != null)
+                       ), "the question is in an incomplete state."
+                      );
 
             return new TriviaQuestion(this);
         }

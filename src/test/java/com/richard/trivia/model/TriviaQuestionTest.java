@@ -12,7 +12,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class TriviaQuestionTest {
 
-    @BeforeClass
     private TriviaQuestion buildTestModel(){
         return new TriviaQuestion.Builder()
                 .id(1)
@@ -32,5 +31,28 @@ public class TriviaQuestionTest {
         TriviaQuestion questionA = buildTestModel();
         TriviaQuestion questionB = buildTestModel();
         assertEquals(questionA, questionB);
+    }
+
+    @Test(expectedExceptions = IllegalStateException.class)
+    public void questionIsMissingFields() {
+        TriviaQuestion question = new TriviaQuestion.Builder()
+                .id(2)
+                .question("Am I incomplete?")
+                .build();
+    }
+
+    @Test(expectedExceptions = IllegalStateException.class)
+    public void questionHasNegativeId() {
+        TriviaQuestion question = new TriviaQuestion.Builder()
+                .id(-1)
+                .question("Who/What does Lemmy love the most?")
+                .answerA("Drake")
+                .answerB("Richie")
+                .answerC("Her Family")
+                .answerD("Food")
+                .hint("Yum Yum")
+                .lastUpdated(LocalDate.now())
+                .correctAnswer("Food")
+                .build();
     }
 }
