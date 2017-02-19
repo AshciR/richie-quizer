@@ -1,8 +1,8 @@
 package com.richard.trivia.model;
 
-import static com.google.common.base.Preconditions.checkState;
-
 import java.time.LocalDate;
+
+import static com.google.common.base.Preconditions.checkState;
 
 /**
  * Data model used to represent a Trivia Question.
@@ -76,6 +76,9 @@ public final class TriviaQuestion {
 
     /**
      * The builder class used to create Trivia Questions.
+     * Trivia Questions can only be created using this builder.
+     * It also requires all fields to be supplied with correct values or
+     * it will throw an IllegalState Exception.
      */
     public static class Builder {
 

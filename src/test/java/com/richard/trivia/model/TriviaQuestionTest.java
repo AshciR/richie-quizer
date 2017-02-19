@@ -1,6 +1,5 @@
 package com.richard.trivia.model;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -35,7 +34,7 @@ public class TriviaQuestionTest {
 
     @Test(expectedExceptions = IllegalStateException.class)
     public void questionIsMissingFields() {
-        TriviaQuestion question = new TriviaQuestion.Builder()
+        new TriviaQuestion.Builder()
                 .id(2)
                 .question("Am I incomplete?")
                 .build();
@@ -43,7 +42,7 @@ public class TriviaQuestionTest {
 
     @Test(expectedExceptions = IllegalStateException.class)
     public void questionHasNegativeId() {
-        TriviaQuestion question = new TriviaQuestion.Builder()
+        new TriviaQuestion.Builder()
                 .id(-1)
                 .question("Who/What does Lemmy love the most?")
                 .answerA("Drake")
