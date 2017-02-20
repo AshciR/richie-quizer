@@ -2,8 +2,10 @@ package com.richard.trivia.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The array implementation of the Trivia Question database.
@@ -89,7 +91,15 @@ public final class TriviaQuestionArrayAccessor implements TriviaQuestionAccessib
      */
     @Override
     public List<TriviaQuestion> getSpecifiedQuestionsList(long... id) {
-        return null;
+
+        final List<Long> ids = Arrays.stream(id)
+                                     .boxed()
+                                     .collect(Collectors.toList());
+
+        return this.questions.stream()
+                             .filter(p -> ids.contains(p.getId()))
+                             .collect(Collectors.toList());
+
     }
 
     /**

@@ -3,10 +3,14 @@ package com.richard.trivia.model;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Unit test for the TriviaQuestionArray accessor.
@@ -71,6 +75,34 @@ public class TriviaQuestionArrayAccessorTest {
                                                                      .getQuestionById(invalidId);
 
         assertEquals(actual, Optional.empty());
+    }
+
+    @Test
+    public void getQuestionsBySpecifiedList(){
+        List<TriviaQuestion> questionList = TriviaQuestionArrayAccessor.getDatabase()
+                                                                       .getSpecifiedQuestionsList(100, 200, 300);
+
+        List<Long> actual = questionList.stream()
+                                        .map(TriviaQuestion::getId)
+                                        .collect(Collectors.toList());
+
+        List<Long> expected = Arrays.asList(100L, 200L, 300L);
+        assertTrue(actual.containsAll(expected));
+
+    }
+
+    @Test
+    public void getQuestionsBySpecifiedListWithInvalidIds(){
+        List<TriviaQuestion> questionList = TriviaQuestionArrayAccessor.getDatabase()
+                                                                       .getSpecifiedQuestionsList(100, 222, 333, 400);
+
+        List<Long> actual = questionList.stream()
+                                        .map(TriviaQuestion::getId)
+                                        .collect(Collectors.toList());
+
+        List<Long> expected = Arrays.asList(100L, 400L);
+        assertTrue(actual.containsAll(expected));
+
     }
 
 }
