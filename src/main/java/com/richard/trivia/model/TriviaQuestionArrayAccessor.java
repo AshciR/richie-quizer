@@ -52,7 +52,11 @@ public final class TriviaQuestionArrayAccessor implements TriviaQuestionAccessib
      */
     @Override
     public Optional<TriviaQuestion> getQuestionById(long id) {
-        return null;
+
+        return this.questions.stream()
+                             .filter(question -> question.getId() == id)
+                             .findAny();
+
     }
 
     /**
@@ -61,7 +65,7 @@ public final class TriviaQuestionArrayAccessor implements TriviaQuestionAccessib
      * @return a random trivia question.
      */
     @Override
-    public Optional<TriviaQuestion> getRandomQuestion() {
+    public TriviaQuestion getRandomQuestion() {
         return null;
     }
 

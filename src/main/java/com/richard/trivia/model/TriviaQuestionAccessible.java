@@ -32,7 +32,7 @@ public interface TriviaQuestionAccessible {
      * Gets a random trivia question
      * @return a random trivia question.
      */
-    Optional<TriviaQuestion> getRandomQuestion();
+    TriviaQuestion getRandomQuestion();
 
     /**
      * Returns a sublist of questions from the database
