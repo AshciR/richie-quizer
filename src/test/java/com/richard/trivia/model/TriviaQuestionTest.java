@@ -54,4 +54,22 @@ public class TriviaQuestionTest {
                 .correctAnswer("Food")
                 .build();
     }
+
+    @Test
+    public void idCanBeZero() {
+        TriviaQuestion question = new TriviaQuestion.Builder()
+                .id(0)
+                .question("Who/What does Lemmy love the most?")
+                .answerA("Drake")
+                .answerB("Richie")
+                .answerC("Her Family")
+                .answerD("Food")
+                .hint("Yum Yum")
+                .lastUpdated(LocalDate.now())
+                .correctAnswer("Food")
+                .build();
+
+        assertEquals(question.getId(), 0);
+    }
+
 }
