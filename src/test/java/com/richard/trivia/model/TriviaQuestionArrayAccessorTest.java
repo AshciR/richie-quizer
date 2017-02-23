@@ -105,4 +105,13 @@ public class TriviaQuestionArrayAccessorTest {
 
     }
 
+    @Test
+    public void getRandomQuestion(){
+        TriviaQuestionArrayAccessor questionDB = TriviaQuestionArrayAccessor.getDatabase();
+        TriviaQuestion randomQuestion = questionDB.getRandomQuestion();
+        Optional<TriviaQuestion> expected = questionDB.getQuestionById(randomQuestion.getId());
+
+        assertEquals(randomQuestion, expected.get());
+    }
+
 }

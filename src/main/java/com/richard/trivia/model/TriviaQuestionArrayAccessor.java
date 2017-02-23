@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -68,7 +69,8 @@ public final class TriviaQuestionArrayAccessor implements TriviaQuestionAccessib
      */
     @Override
     public TriviaQuestion getRandomQuestion() {
-        return null;
+        int index = new Random().nextInt(questions.size());
+        return questions.get(index);
     }
 
     /**
