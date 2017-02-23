@@ -3,8 +3,10 @@ package com.richard.trivia.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -68,19 +70,34 @@ public final class TriviaQuestionArrayAccessor implements TriviaQuestionAccessib
      */
     @Override
     public TriviaQuestion getRandomQuestion() {
-        return null;
+        int index = new Random().nextInt(questions.size());
+        return questions.get(index);
     }
 
     /**
      * Returns a sublist of questions from the database
-     * starting from a particular location.
+     * starting from a particular location. If the caller supplies an invalid offset
+     * an empty list will be returned.
      *
      * @param offset the location for which the sublist should start
      * @return the sublist of questions
      */
     @Override
     public List<TriviaQuestion> getQuestionList(long offset) {
-        return null;
+
+        List<TriviaQuestion> list;
+
+        try {
+
+            list =  this.questions.stream()
+                                  .skip(offset)
+                                  .collect(Collectors.toList());
+
+        } catch (IllegalArgumentException e) {
+            list = Collections.emptyList();
+        }
+
+        return list;
     }
 
     /**
