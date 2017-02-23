@@ -88,8 +88,12 @@ public final class TriviaQuestionArrayAccessor implements TriviaQuestionAccessib
         List<TriviaQuestion> list;
 
         try {
-            list = this.questions.subList((int) offset, questions.size());
-        } catch (IndexOutOfBoundsException e) {
+
+            list =  this.questions.stream()
+                                  .skip(offset)
+                                  .collect(Collectors.toList());
+
+        } catch (IllegalArgumentException e) {
             list = Collections.emptyList();
         }
 
