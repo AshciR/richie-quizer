@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -112,6 +113,24 @@ public class TriviaQuestionArrayAccessorTest {
         Optional<TriviaQuestion> expected = questionDB.getQuestionById(randomQuestion.getId());
 
         assertEquals(randomQuestion, expected.get());
+    }
+
+    @Test
+    public void getQuestionSublistWithValidPartitions(){
+        TriviaQuestionArrayAccessor questionDB = TriviaQuestionArrayAccessor.getDatabase();
+        List<TriviaQuestion> subList = questionDB.getQuestionList(2);
+
+        assertEquals(subList.size(), 3);
+        assertEquals(subList.get(0), questionDB.getQuestionByIndex(2).get());
+    }
+
+    @Test(dataProvider = "invalidIndices")
+    public void getQuestionSublistWithInvalidOffsets(long index){
+        List<TriviaQuestion> list = TriviaQuestionArrayAccessor.getDatabase()
+                                                               .getQuestionList(index);
+
+        assertEquals(list, Collections.EMPTY_LIST);
+
     }
 
 }
